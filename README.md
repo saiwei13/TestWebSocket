@@ -6,7 +6,7 @@ This is example code showing how to use websockets from iOS and Android, in the 
 
 #server
 
-A simple websocket server written in ****tornado**** sss.
+A simple websocket server written in ***tornado*** **tornado**   **tornado.
 
 #android
 
