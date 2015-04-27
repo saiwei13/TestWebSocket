@@ -121,139 +121,15 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 //        WebSocketLogic.getInstance().disconnect();
     }
 
-    /**
-     * 测试　注册接口
-     */
-    private void testRegister(){
-
-        Log.i(TAG,"testRegister() ");
-        String Server_url="http://192.168.1.104:8888/register";
-        URL url = null;
-        HttpURLConnection con = null;
-        OutputStream output = null;
-        InputStream in = null;
-
-        try {
-            url = new URL(Server_url);
-            Log.i(TAG,"url="+url.toString());
-            con = (HttpURLConnection) url.openConnection();
-            con.setRequestMethod("POST");
-            con.setConnectTimeout(10000);
-
-            JSONObject json=new JSONObject();
-            try {
-                json.put("username","bb");
-                json.put("pwd",md5("123456"));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            output = con.getOutputStream();
-            output.write(json.toString().getBytes());
-
-            Log.i(TAG, "注册：　" + json.toString());
-
-            readStream(con.getInputStream());
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-            Log.e(TAG,e.toString());
-        } catch (IOException e) {
-            Log.e(TAG,e.toString());
-            e.printStackTrace();
-        }  finally {
-            if(con != null) con.disconnect();
-            if(output != null) try {
-                output.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    /**
-     * 测试　登陆接口
-     */
-    private void testLogin(){
-
-        Log.i(TAG,"testLogin() ");
-        String Server_url="http://192.168.1.104:8888/login";
-        URL url = null;
-        HttpURLConnection con = null;
-        OutputStream output = null;
-        InputStream in = null;
-
-        try {
-            url = new URL(Server_url);
-            Log.i(TAG,"url="+url.toString());
-            con = (HttpURLConnection) url.openConnection();
-            con.setRequestMethod("POST");
-            con.setConnectTimeout(10000);
-
-            JSONObject json=new JSONObject();
-            try {
-                json.put("username","bb");
-                json.put("pwd",md5("12345"));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            output = con.getOutputStream();
-            output.write(json.toString().getBytes());
-
-
-            Log.i(TAG, "登陆：　" + json.toString());
-
-            readStream(con.getInputStream());
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-            Log.e(TAG,e.toString());
-        } catch (IOException e) {
-            Log.e(TAG,e.toString());
-            e.printStackTrace();
-        }  finally {
-            if(con != null) con.disconnect();
-            if(output != null) try {
-                output.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-
     @Override
     public void onClick(View v) {
         if(mBtConnect == v){
-//            if(WebSocketLogic.getInstance().isConnected()){
-//                Toast.makeText(MainActivity.this,"回到聊天室....",Toast.LENGTH_SHORT).show();
-//                startActivity(new Intent(MainActivity.this,ChatRoomActivity.class));
-//            }else {
-//                WebSocketLogic.getInstance().connect();
-//            }
-//            testRegister();
-
-
-//            Log.i(TAG,"md5 1 = "+md5(1+""));
-
-            Thread thread = new Thread(new Runnable(){
-                @Override
-                public void run() {
-                    try {
-                        //Your code goes here
-//                        testGet();
-//                        testRegister();
-                        testLogin();
-//                        makeGetRequest();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-
-            thread.start();
-
+            if(WebSocketLogic.getInstance().isConnected()){
+                Toast.makeText(MainActivity.this,"回到聊天室....",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this,ChatRoomActivity.class));
+            }else {
+                WebSocketLogic.getInstance().connect();
+            }
         } else if(mBtDisConn == v){
             WebSocketLogic.getInstance().disconnect();
         }
