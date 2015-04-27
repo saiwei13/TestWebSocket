@@ -6,10 +6,12 @@ This is example code showing how to use websockets from iOS and Android, in the 
 
 #server
 
-A simple websocket server written in ***tornado*** **tornado**   **tornado.
+A simple websocket server written in **tornado**.
 
 #android
 
-Android client in Java. android 客户端，测试web socket功能
+Android client in Java. test web socket function.
 
+#demo
+chat demo
 
